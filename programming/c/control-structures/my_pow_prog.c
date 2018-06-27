@@ -11,11 +11,13 @@ int main(void)
     int val = 1;                /* The current power of k  */
 
     printf("\t  n  \t    2^n\n");
-    printf("\t================\n");
-
+    printf("\t===============\n");
+    for(n=0;n<=N;n++){
+	    printf("\t %d \t %d\n", n,val);
+	    val *= k;
+    }
     /* Add here a for loop that at each iteration prints out
        the current value of the power and updates val */
-#error Add the missing loop
 
     return 0;
 }
