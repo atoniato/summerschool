@@ -10,6 +10,7 @@
 
 int main(int argc, char **argv)
 {
+    printf("HERE");
     double a = 0.5;             //!< Diffusion constant
     field current, previous;    //!< Current and previous temperature fields
 

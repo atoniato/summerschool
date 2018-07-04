@@ -76,17 +76,27 @@ void initialize(int argc, char *argv[], field *current,
  * Boundary conditions are (different) constant temperatures outside the grid */
 void generate_field(field *temperature)
 {
-    int i, j;
-    double radius;
-    int dx, dy;
+	int i, j;
+	double radius;
+	int dx, dy;
+	int x_cent, y_cent;
 
-    /* Allocate the temperature array, note that
-     * we have to allocate also the ghost layers */
-    temperature->data =
-        malloc_2d(temperature->nx + 2, temperature->ny + 2);
+	radius = (double)temperature->nx/6;
+	x_cent = (temperature->nx+2)/2;
+	y_cent = (temperature->ny+2)/2;
 
-    /* TODO: Initialize the values of temperature */
-#error Add field initialization
+	/* Allocate the temperature array, note that
+	 * we have to allocate also the ghost layers */
+	temperature->data =
+		malloc_2d(temperature->nx + 2, temperature->ny + 2);
+
+	/* TODO: Initialize the values of temperature */
+	for(i=0;i<temperature->nx+2;i++)for(j=0;j<temperature->ny+2;j++){
+		if(((i-x_cent)*(i-x_cent)+(j-y_cent)*(j-y_cent))<=radius*radius){
+				temperature->data[i][j] = 100;
+		}
+		else {temperature->data[i][j]=0;}
+	}
 
 }
 

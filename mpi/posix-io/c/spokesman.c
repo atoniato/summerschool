@@ -50,10 +50,24 @@ void single_writer(int my_id, int *localvector, int localsize)
 {
     FILE *fp;
     int *fullvector;
+    int j;
 
     /* TODO: Implement a function that will write the data to file so that
        a single process does the file io. Use rank WRITER_ID as the io rank */
 
+    fullvector = (int *)malloc(DATASIZE*sizeof(int));
+
+    MPI_Gather(localvector,localsize,MPI_INT,fullvector,localsize,MPI_INT,0,MPI_COMM_WORLD);
+
+    if(my_id==0){
+	    fp = fopen("logfile","w"); 
+	    for(j=0;j<DATASIZE;j++){
+		    fprintf(fp,"%d",fullvector[j]);
+	    }
+	    fclose(fp);
+    }
+
     free(fullvector);
 }
+
 
